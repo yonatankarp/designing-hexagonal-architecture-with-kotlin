@@ -1,30 +1,34 @@
 package com.yonatankarp.domain.entity
 
+import com.yonatankarp.domain.valueobject.IP
+import com.yonatankarp.domain.valueobject.Network
 import com.yonatankarp.domain.valueobject.RouterId
 import com.yonatankarp.domain.valueobject.RouterType
 
-typealias RouterPredicate = (Router) -> Boolean
-
-class Router(
+data class Router(
     val routerType: RouterType,
-    private val routerId: RouterId,
+    val routerId: RouterId,
+    var networkSwitch: Switch,
 ) {
-    companion object {
-        fun retrieveRouter(
-            routers: List<Router>,
-            predicate: RouterPredicate,
-        ) = routers
-            .filter(predicate)
-            .toList()
+    fun addNetworkToSwitch(network: Network) {
+        networkSwitch = networkSwitch.addNetwork(network) // FIXME: see if I can use copy instead
+    }
 
-        fun filterRouterByType(routerType: RouterType): RouterPredicate =
+    fun createNetwork(
+        address: IP,
+        name: String,
+        cidr: Int,
+    ) = Network(address, name, cidr)
+
+    companion object {
+        fun filterRouterByType(routerType: RouterType): (Router) -> Boolean =
             when (routerType) {
                 RouterType.CORE -> isCore()
                 else -> isEdge()
             }
 
-        private fun isCore(): RouterPredicate = { router -> router.routerType == RouterType.CORE }
+        fun isCore(): (Router) -> Boolean = { router -> router.routerType == RouterType.CORE }
 
-        private fun isEdge(): RouterPredicate = { router -> router.routerType == RouterType.EDGE }
+        fun isEdge(): (Router) -> Boolean = { router -> router.routerType == RouterType.EDGE }
     }
 }
