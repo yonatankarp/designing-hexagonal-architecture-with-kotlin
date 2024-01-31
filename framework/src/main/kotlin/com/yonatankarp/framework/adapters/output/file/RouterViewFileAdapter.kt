@@ -22,7 +22,7 @@ object RouterViewFileAdapter : RouterViewOutputPort {
                 stream
                     .map { line ->
                         val (id, type) = line.split(";")
-                        Router(RouterType.valueOf(type), RouterId.of(id))
+                        Router(RouterType.valueOf(type), RouterId.withId(id))
                     }
                     .toList()
             }
