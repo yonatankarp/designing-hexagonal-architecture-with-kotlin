@@ -3,9 +3,9 @@ package com.yonatankarp.domain.valueobject
 data class Network(
     val address: IP,
     val name: String,
-    val cidr: Int,
+    val cidr: UInt,
 ) {
     init {
-        require(cidr in 1..32) { "Invalid CIDR value" }
+        require(cidr in 1u..32u) { "Invalid CIDR value" }
     }
 }

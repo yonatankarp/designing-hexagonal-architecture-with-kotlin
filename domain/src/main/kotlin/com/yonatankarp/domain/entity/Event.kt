@@ -8,13 +8,13 @@ import com.yonatankarp.domain.valueobject.ParsePolicyType
 import com.yonatankarp.domain.valueobject.ParsePolicyType.REGEX
 import com.yonatankarp.domain.valueobject.ParsePolicyType.SPLIT
 import com.yonatankarp.domain.valueobject.Protocol
-import java.time.OffsetDateTime
+import java.time.OffsetTime
 
 data class Event(
-    private val timestamp: OffsetDateTime,
-    private val id: EventId,
-    private val protocol: Protocol,
-    private val activity: Activity,
+    val timestamp: OffsetTime,
+    val id: EventId,
+    val protocol: Protocol,
+    val activity: Activity,
 ) : Comparable<Event> {
     override fun compareTo(other: Event) = timestamp.compareTo(other.timestamp)
 

@@ -12,7 +12,7 @@ class NetworkOperation {
         router: Router,
         address: IP,
         name: String,
-        cidr: Int,
+        cidr: UInt,
     ) {
         val availabilitySpec = NetworkAvailabilitySpecification(address, name, cidr)
         val cidrSpec = CIDRSpecification()

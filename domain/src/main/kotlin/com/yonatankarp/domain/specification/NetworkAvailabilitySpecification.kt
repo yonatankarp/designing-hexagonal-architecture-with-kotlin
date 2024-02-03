@@ -7,7 +7,7 @@ import com.yonatankarp.domain.valueobject.IP
 class NetworkAvailabilitySpecification(
     private val address: IP,
     private val name: String,
-    private val cidr: Int,
+    private val cidr: UInt,
 ) : AbstractSpecification<Router>() {
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun isSatisfiedBy(router: Router) = isNetworkAvailable(router)

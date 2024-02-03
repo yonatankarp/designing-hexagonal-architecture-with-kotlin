@@ -8,6 +8,6 @@ interface EventParser {
     fun parseEvent(event: String): Event
 
     companion object {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS").withZone(ZoneId.of("UTC"))
+        val formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSSSSS").withZone(ZoneId.of("UTC"))
     }
 }
