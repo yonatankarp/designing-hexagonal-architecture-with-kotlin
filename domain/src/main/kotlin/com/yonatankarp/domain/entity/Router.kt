@@ -17,7 +17,7 @@ data class Router(
     fun createNetwork(
         address: IP,
         name: String,
-        cidr: Int,
+        cidr: UInt,
     ) = Network(address, name, cidr)
 
     companion object {

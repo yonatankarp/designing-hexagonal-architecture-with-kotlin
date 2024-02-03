@@ -1,3 +1,7 @@
+plugins {
+    `java-test-fixtures`
+}
+
 dependencies {
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation(libs.bundles.tests.all)
 }

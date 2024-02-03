@@ -1,5 +1,5 @@
 dependencies {
     api(project(":domain"))
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation(libs.bundles.tests.all)
 }
