@@ -7,7 +7,7 @@ value class RouterId(val id: UUID) {
     override fun toString() = "RouterId{id='$id'}"
 
     companion object {
-        fun withId(id: UUID) = RouterId(id)
+        fun withId(id: String) = RouterId(UUID.fromString(id))
 
         fun withoutId() = RouterId(UUID.randomUUID())
     }
