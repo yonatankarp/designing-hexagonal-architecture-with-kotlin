@@ -51,4 +51,23 @@ class NetworkAvailabilitySpecificationTest {
         // Then
         assertFalse(result)
     }
+
+    @Test
+    fun `should not be satisfied when router is null`() {
+        // Given
+        val router = null
+        val matchingNetwork = SwitchFixture.multipleNetworkSwitch.networks.first()
+        val specification =
+            NetworkAvailabilitySpecification(
+                matchingNetwork.address,
+                matchingNetwork.name,
+                matchingNetwork.cidr,
+            )
+
+        // When
+        val result = specification.isSatisfiedBy(router)
+
+        // Then
+        assertFalse(result)
+    }
 }
