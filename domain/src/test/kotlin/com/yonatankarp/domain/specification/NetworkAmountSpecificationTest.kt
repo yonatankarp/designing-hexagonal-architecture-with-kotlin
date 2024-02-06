@@ -69,4 +69,17 @@ class NetworkAmountSpecificationTest {
         // Then
         assertFalse(result)
     }
+
+    @Test
+    fun `should not be satisfied when router is null`() {
+        // Given
+        val router = null
+        val specification = NetworkAmountSpecification()
+
+        // When
+        val result = specification.isSatisfiedBy(router)
+
+        // Then
+        kotlin.test.assertFalse(result)
+    }
 }

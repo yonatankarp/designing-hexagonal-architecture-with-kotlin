@@ -72,7 +72,6 @@ class RouterTest {
         val routerEdge = RouterFixture.randomEdgeRouter
 
         // When
-        val filterCore = Router.filterRouterByType(RouterType.CORE)
         val filterEdge = Router.filterRouterByType(RouterType.EDGE)
 
         // Then

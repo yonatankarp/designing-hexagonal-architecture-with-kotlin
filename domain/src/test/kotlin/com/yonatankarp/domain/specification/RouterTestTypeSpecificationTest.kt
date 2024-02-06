@@ -6,6 +6,7 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
+import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -31,6 +32,19 @@ class RouterTestTypeSpecificationTest {
         // Given
         val router = mockk<Router>()
         every { router.routerType } returns type
+        val specification = RouterTypeSpecification()
+
+        // When
+        val result = specification.isSatisfiedBy(router)
+
+        // Then
+        assertFalse(result)
+    }
+
+    @Test
+    fun `should not be satisfied when router is null`() {
+        // Given
+        val router = null
         val specification = RouterTypeSpecification()
 
         // When
