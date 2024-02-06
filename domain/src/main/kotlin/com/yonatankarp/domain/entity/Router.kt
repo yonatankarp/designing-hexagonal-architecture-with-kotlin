@@ -11,7 +11,7 @@ data class Router(
     var networkSwitch: Switch,
 ) {
     fun addNetworkToSwitch(network: Network) {
-        networkSwitch = networkSwitch.addNetwork(network) // FIXME: see if I can use copy instead
+        networkSwitch = networkSwitch.addNetwork(network)
     }
 
     fun createNetwork(
