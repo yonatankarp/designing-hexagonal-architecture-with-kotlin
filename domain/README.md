@@ -1,4 +1,4 @@
-# Domain
+# Domain Hexagon
 
 The domain module contains the following:
 
