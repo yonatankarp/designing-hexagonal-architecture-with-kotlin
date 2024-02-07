@@ -1,11 +1,10 @@
-package com.yonatankarp.framework.bdd
+package com.yonatankarp.application.bdd
 
 import com.yonatankarp.domain.entity.Router
 import com.yonatankarp.domain.specification.CIDRSpecification
 import com.yonatankarp.domain.specification.NetworkAvailabilitySpecification
 import com.yonatankarp.domain.valueobject.NetworkFixture
 import com.yonatankarp.domain.valueobject.RouterId
-import com.yonatankarp.framework.adapters.output.file.RouterNetworkFileAdapter
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
@@ -25,7 +24,7 @@ class AddNetworkSteps {
 
     @When("I found the router")
     fun `lookup router`() {
-        router = RouterNetworkFileAdapter.fetchRouterById(routerId)
+        router = SampleRouterView.fetchRouterById(routerId)
             ?: throw RuntimeException("Router not found by ID $routerId")
     }
 
@@ -43,7 +42,7 @@ class AddNetworkSteps {
     @Given("The CIDR is valid")
     fun `check cidr`() {
         val cidrSpec = CIDRSpecification()
-        require(!cidrSpec.isSatisfiedBy(network.cidr)) { "CIDR is below " + CIDRSpecification.MINIMUM_ALLOWED_CIDR }
+        require(cidrSpec.isSatisfiedBy(network.cidr)) { "CIDR is below " + CIDRSpecification.MINIMUM_ALLOWED_CIDR }
     }
 
     @Then("Add the network to the router")

@@ -7,7 +7,7 @@ import com.yonatankarp.domain.valueobject.RouterType
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class RouterViewInputPortTest {
     @Test
