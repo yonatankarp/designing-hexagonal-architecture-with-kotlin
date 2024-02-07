@@ -44,11 +44,11 @@ class RouterTest {
         val networkToAdd = NetworkFixture.randomValidNetworkIpv4
 
         // When
-        router.addNetworkToSwitch(networkToAdd)
+        val result = router.addNetworkToSwitch(networkToAdd)
 
         // Then
         assertFalse(originalSwitch.networks.contains(networkToAdd))
-        assertTrue(router.networkSwitch.networks.contains(networkToAdd))
+        assertTrue(result.networkSwitch.networks.contains(networkToAdd))
     }
 
     @Test

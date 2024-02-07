@@ -9,4 +9,7 @@ object NetworkFixture {
 
     val randomValidNetworkIpv4: Network get() = Network(IPFixture.randomIPv4, "RandomNetwork", Random.nextUInt(9u, 33u))
     val randomValidNetworkIpv6: Network get() = Network(IPFixture.randomIPv6, "RandomNetwork", Random.nextUInt(9u, 33u))
+
+    val invalidCidrNetworkIpv4: Network get() = Network(IPFixture.randomIPv4, "RandomNetwork", Random.nextUInt(1u, 8u))
+    val invalidCidrNetworkIpv6: Network get() = Network(IPFixture.randomIPv6, "RandomNetwork", Random.nextUInt(1u, 8u))
 }
