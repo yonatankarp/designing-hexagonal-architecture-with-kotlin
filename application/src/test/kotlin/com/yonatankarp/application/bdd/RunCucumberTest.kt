@@ -1,4 +1,4 @@
-package com.yonatankarp.framework.bdd
+package com.yonatankarp.application.bdd
 
 import io.cucumber.junit.Cucumber
 import io.cucumber.junit.CucumberOptions

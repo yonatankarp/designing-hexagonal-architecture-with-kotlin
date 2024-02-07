@@ -6,13 +6,13 @@ import com.yonatankarp.domain.entity.Router
 import com.yonatankarp.domain.valueobject.RouterType
 import com.yonatankarp.framework.adapters.output.file.RouterViewFileAdapter
 
-class RouterViewCLIAdapter {
-    private val routerViewUseCase: RouterViewUseCase = setAdapters()
-
+class RouterViewCLIAdapter(private val routerViewUseCase: RouterViewUseCase = defaultAdapters()) {
     fun obtainRelatedRouters(type: String): List<Router> =
         routerViewUseCase.getRouters(
             Router.filterRouterByType(RouterType.valueOf(type)),
         )
 
-    private fun setAdapters() = RouterViewInputPort(RouterViewFileAdapter)
+    companion object {
+        private fun defaultAdapters(): RouterViewUseCase = RouterViewInputPort(RouterViewFileAdapter)
+    }
 }
