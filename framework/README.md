@@ -1,4 +1,4 @@
-# Framework
+# Framework Hexagon
 
 ![architecture-diagram.png](etc/architecture-diagram.png)
 
