@@ -5,25 +5,36 @@ import com.yonatankarp.domain.specification.CIDRSpecification
 import com.yonatankarp.domain.specification.NetworkAmountSpecification
 import com.yonatankarp.domain.specification.NetworkAvailabilitySpecification
 import com.yonatankarp.domain.specification.RouterTypeSpecification
-import com.yonatankarp.domain.valueobject.IP
+import com.yonatankarp.domain.valueobject.Network
 
-class NetworkOperation {
+object NetworkOperation {
     fun createNetWork(
         router: Router,
-        address: IP,
-        name: String,
-        cidr: UInt,
-    ) {
-        val availabilitySpec = NetworkAvailabilitySpecification(address, name, cidr)
+        network: Network,
+    ): Router? {
+        val availabilitySpec =
+            NetworkAvailabilitySpecification(
+                network.address,
+                network.name,
+                network.cidr,
+            )
         val cidrSpec = CIDRSpecification()
-        val networkSpec = RouterTypeSpecification() and NetworkAmountSpecification()
+        val networkSpec =
+            RouterTypeSpecification() and NetworkAmountSpecification()
 
-        require(cidrSpec.isSatisfiedBy(cidr)) { "CIDR is below ${CIDRSpecification.MINIMUM_ALLOWED_CIDR}" }
+        require(cidrSpec.isSatisfiedBy(network.cidr)) { "CIDR is below ${CIDRSpecification.MINIMUM_ALLOWED_CIDR}" }
         require(availabilitySpec.isSatisfiedBy(router)) { "Address already exist" }
 
-        if (networkSpec.isSatisfiedBy(router)) {
-            val network = router.createNetwork(address, name, cidr)
-            router.addNetworkToSwitch(network)
+        return if (networkSpec.isSatisfiedBy(router)) {
+            val newNetwork =
+                router.createNetwork(
+                    network.address,
+                    network.name,
+                    network.cidr,
+                )
+            router.addNetworkToSwitch(newNetwork)
+        } else {
+            null
         }
     }
 }

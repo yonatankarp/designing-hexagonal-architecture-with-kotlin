@@ -10,9 +10,7 @@ data class Router(
     val routerId: RouterId,
     var networkSwitch: Switch,
 ) {
-    fun addNetworkToSwitch(network: Network) {
-        networkSwitch = networkSwitch.addNetwork(network)
-    }
+    fun addNetworkToSwitch(network: Network) = copy(networkSwitch = networkSwitch.addNetwork(network))
 
     fun createNetwork(
         address: IP,
