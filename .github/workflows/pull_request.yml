@@ -14,7 +14,6 @@ jobs:
   pipeline:
     uses: yonatankarp/github-actions/.github/workflows/ci.yml@v1
     with:
-      context: ${{ matrix.module }}
       build_dockerfile: false
 
   dependabot_auto_merge:
