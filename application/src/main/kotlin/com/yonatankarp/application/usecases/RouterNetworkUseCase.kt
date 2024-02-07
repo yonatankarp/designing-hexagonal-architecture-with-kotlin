@@ -8,5 +8,5 @@ fun interface RouterNetworkUseCase {
     fun addNetworkToRouter(
         routerId: RouterId,
         network: Network,
-    ): Router
+    ): Router?
 }
