@@ -2,6 +2,7 @@
 
 coroutines = "1.7.3"
 cucumber = "7.15.0"
+jackson = "2.16.1"
 junit = "5.10.1"
 kotlin = "1.9.22"
 mockk = "1.13.9"
@@ -12,6 +13,10 @@ spotless = "6.25.0"
 # Kotlin
 kotlin_core = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
 kotlinx_coroutines_core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# Serialization
+jackson_databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson_kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 
 # Tests
 cucumber_junit = { module = "io.cucumber:cucumber-junit", version.ref = "cucumber" }
@@ -29,15 +34,20 @@ spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 [bundles]
 
+cucumber_all = [
+    "cucumber_junit",
+    "cucumber_jvm",
+    "cucumber_jvm8",
+]
+
+jackson_all = [
+    "jackson_databind",
+    "jackson_kotlin",
+]
+
 tests_all = [
     "junit_params",
     "kotlin_test",
     "kotlinx_coroutines_test",
     "mockk",
-]
-
-cucumber_all = [
-    "cucumber_junit",
-    "cucumber_jvm",
-    "cucumber_jvm8",
 ]
