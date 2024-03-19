@@ -6,14 +6,14 @@ import com.sun.net.httpserver.HttpServer
 import com.yonatankarp.application.usecases.RouterNetworkUseCase
 import com.yonatankarp.domain.entity.Router
 import com.yonatankarp.framework.adapters.input.RouterNetworkAdapter
-import com.yonatankarp.framework.adapters.input.rest.RouterNetworkRestAdapter.HttpStatus.*
+import com.yonatankarp.framework.adapters.input.rest.RouterNetworkRestAdapter.HttpStatus.METHOD_NOT_ALLOWED
+import com.yonatankarp.framework.adapters.input.rest.RouterNetworkRestAdapter.HttpStatus.OK
 import com.yonatankarp.framework.adapters.output.file.mappers.RouterJsonFileMapper.toJson
 import java.net.URLDecoder
 
 class RouterNetworkRestAdapter(
     routerNetworkUseCase: RouterNetworkUseCase,
 ) : RouterNetworkAdapter(routerNetworkUseCase) {
-
     override fun processRequest(requestParams: Any): Router? {
         var router: Router? = null
         if (requestParams is HttpServer) {
@@ -55,7 +55,7 @@ class RouterNetworkRestAdapter(
             else -> {
                 exchange.sendResponseHeaders(
                     METHOD_NOT_ALLOWED.value,
-                    NOT_CONTENT_BODY
+                    NOT_CONTENT_BODY,
                 )
                 exchange.close()
                 null
@@ -76,15 +76,14 @@ class RouterNetworkRestAdapter(
             "routerId" to routerId,
             "address" to address,
             "name" to name,
-            "cidr" to cidr
+            "cidr" to cidr,
         )
     }
 
     private fun Map<String, List<String>>.getValue(
         key: String,
-        default: String
+        default: String,
     ) = getOrDefault(key, listOf(default)).firstOrDefault(default)
-
 
     private fun <T> List<T>.firstOrDefault(t: T) = firstOrNull() ?: t
 
@@ -103,7 +102,7 @@ class RouterNetworkRestAdapter(
 
     enum class HttpStatus(val value: Int) {
         OK(200),
-        METHOD_NOT_ALLOWED(405)
+        METHOD_NOT_ALLOWED(405),
     }
 
     companion object {
